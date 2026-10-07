@@ -76,18 +76,19 @@ th:nth-child(2) {
 td:first-child,
 th:first-child {
   position: sticky;
-  left: 0;                 /* blijft altijd links */
+  left: 0;
   background: #c00000;
   color: #ffffff;
   z-index: 10;
 
-  width: 40px;             /* smalle kolom */
-  min-width: 40px;
-  max-width: 40px;
+  width: 35px;             /* iets smaller */
+  min-width: 35px;
+  max-width: 35px;
 
-  padding: 0 4px;          /* kleine padding */
-  box-sizing: border-box;  /* voorkomt dat padding de breedte vergroot */
-  text-align: left;        /* nummers links */
+  padding: 0 3px;
+  box-sizing: border-box;
+  text-align: center;       /* nummer mooi gecentreerd */
+  font-size: 11px;          /* iets kleiner nummer */
 }
 
 
@@ -97,19 +98,24 @@ th:first-child {
 td:nth-child(2),
 th:nth-child(2) {
   position: sticky;
-  left: 40px;              /* exact dezelfde breedte als kolom 1 */
+  left: 35px;               /* exact dezelfde waarde als kolom 1 */
   background: #c00000;
   color: #ffffff;
   z-index: 9;
 
-  font-size: 12px;         /* kleinere ploegnaam */
-  width: 100px;            /* kolom smaller maken? verlaag deze waarde */
-  min-width: 100px;
-  max-width: 100px;
+  font-size: 11px;          /* kleinere ploegnaam */
+  width: 90px;              /* smaller dan 100px */
+  min-width: 90px;
+  max-width: 90px;
 
+  padding: 0 4px;
   box-sizing: border-box;
-  text-align: left;        /* ploegnaam links */
+  text-align: left;
+  white-space: nowrap;      /* voorkomt dat namen op 2 regels komen */
+  overflow: hidden;         /* verbergt te lange namen */
+  text-overflow: ellipsis;  /* toont '...' bij te lange namen */
 }
+
 
 
 
