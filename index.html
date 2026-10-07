@@ -68,4 +68,91 @@
 
   <div class="table-container">
     <table id="scoreTable">
-      <thead id="tableHead">
+      <thead id="tableHead"></thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    /* Snelle realtime CSV‑link */
+    const CSV_URL =
+      "https://docs.google.com/spreadsheets/d/2PACX-1vSK6OgbEvumfLvHWzht249FtRowmmoYtstc2mlFfzoh54j-NL3kHLBn8Jbz4AV2-A/gviz/tq?tqx=out:csv&gid=1965759856";
+
+    const TEAM_COL = 0;
+    const SCORE_COL = 1;
+
+    let lastCSV = ""; // vorige versie onthouden
+
+    async function loadData() {
+      try {
+        // cacheBust zorgt dat Google geen oude versie geeft
+        const res = await fetch(CSV_URL + "&cacheBust=" + Date.now());
+        const text = await res.text();
+
+        // check of CSV veranderd is
+        if (text === lastCSV) {
+          return; // niets doen
+        }
+
+        lastCSV = text; // nieuwe versie opslaan
+
+        const rows = text
+          .trim()
+          .split("\n")
+          .map(r => r.split(","));
+
+        if (rows.length < 2) return;
+
+        const headers = rows[0];
+        const data = rows.slice(1);
+
+        // sorteren op score (aflopend)
+        data.sort((a, b) => {
+          const sa = parseFloat(a[SCORE_COL]) || 0;
+          const sb = parseFloat(b[SCORE_COL]) || 0;
+          return sb - sa;
+        });
+
+        buildTable(headers, data);
+      } catch (e) {
+        console.error("Fout bij laden CSV:", e);
+      }
+    }
+
+    function buildTable(headers, data) {
+      const headEl = document.getElementById("tableHead");
+      const bodyEl = document.getElementById("tableBody");
+
+      headEl.innerHTML = "";
+      bodyEl.innerHTML = "";
+
+      // header
+      const trHead = document.createElement("tr");
+      headers.forEach(h => {
+        const th = document.createElement("th");
+        th.textContent = h;
+        trHead.appendChild(th);
+      });
+      headEl.appendChild(trHead);
+
+      // body
+      data.forEach(row => {
+        const tr = document.createElement("tr");
+        row.forEach(cell => {
+          const td = document.createElement("td");
+          td.textContent = cell;
+          tr.appendChild(td);
+        });
+        bodyEl.appendChild(tr);
+      });
+    }
+
+    // eerste load
+    loadData();
+
+    // elke 3 seconden checken op wijzigingen
+    setInterval(loadData, 3000);
+  </script>
+
+</body>
+</html>
