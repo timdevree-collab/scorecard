@@ -53,6 +53,22 @@ th:nth-last-child(3) {
   color: #ffffff;
   font-weight: bold;
 }
+/* Standaard: alles centreren */
+td, th {
+  text-align: center;
+}
+
+/* Kolom 1 links */
+td:first-child,
+th:first-child {
+  text-align: left;
+}
+
+/* Kolom 2 links */
+td:nth-child(2),
+th:nth-child(2) {
+  text-align: left;
+}
 
 /* Eerste en tweede kolom sticky */
 td:first-child, th:first-child {
