@@ -54,14 +54,23 @@ th:nth-last-child(3) {
   font-weight: bold;
 }
 
-    /* Linkerkolom sticky */
-    td:first-child, th:first-child {
-      position: sticky;
-      left: 0;
-      background: #c00000;
-      color: #ffffff;
-      z-index: 6;
-    }
+/* Eerste en tweede kolom sticky */
+td:first-child, th:first-child {
+  position: sticky;
+  left: 0;
+  background: #c00000;
+  color: #ffffff;
+  z-index: 6;
+}
+
+td:nth-child(2), th:nth-child(2) {
+  position: sticky;
+  left: 120px; /* breedte van kolom 1 */
+  background: #c00000;
+  color: #ffffff;
+  z-index: 5;
+}
+
 
     /* SCORE‑kolom rood (2e kolom) */
     td:nth-child(2),
