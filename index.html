@@ -77,13 +77,14 @@ td:first-child, th:first-child {
   background: #c00000;
   color: #ffffff;
   z-index: 10;
-  min-width: 70px; /* vaste breedte zodat kolom 2 niet overlapt */
+  min-width: 80px;  /* voorkomt krimpen */
+  max-width: 80px;  /* voorkomt uitrekken */
 }
 
 /* Tweede kolom sticky, naast kolom 1 */
 td:nth-child(2), th:nth-child(2) {
   position: sticky;
-  left: 70px; /* zelfde waarde als min-width van kolom 1 */
+  left: 80px; /* zelfde waarde als min-width van kolom 1 */
   background: #c00000;
   color: #ffffff;
   z-index: 9;
