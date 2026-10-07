@@ -46,7 +46,7 @@
       background: #000000;
     }
 
-    /* linkerkolom “freeze” simulatie */
+    /* Linkerkolom sticky */
     td:first-child, th:first-child {
       position: sticky;
       left: 0;
@@ -54,12 +54,13 @@
       color: #ffffff;
       z-index: 6;
     }
-    /* SCORE‑kolom rood */
-td:nth-last-child(3),
-th:nth-last-child(3) {
-  background: #c00000;
-  color: #ffffff;
-}
+
+    /* SCORE‑kolom rood (2e kolom) */
+    td:nth-child(2),
+    th:nth-child(2) {
+      background: #c00000;
+      color: #ffffff;
+    }
 
   </style>
 </head>
@@ -93,7 +94,14 @@ th:nth-last-child(3) {
         const headers = rows[0];
         const data = rows.slice(1);
 
-          buildTable(headers, data);
+        // sorteren op score (aflopend)
+        data.sort((a, b) => {
+          const sa = parseFloat(a[SCORE_COL]) || 0;
+          const sb = parseFloat(b[SCORE_COL]) || 0;
+          return sb - sa;
+        });
+
+        buildTable(headers, data);
       } catch (e) {
         console.error("Fout bij laden CSV:", e);
       }
