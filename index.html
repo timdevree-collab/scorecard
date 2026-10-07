@@ -78,26 +78,48 @@ td:first-child, th:first-child {
   color: #ffffff;
   z-index: 10;
 
-  width: 50px;
-  min-width: 50px;
-  max-width: 50px;
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
 
-  padding-left: 4px;
-  padding-right: 4px;
+  padding: 0 4px;
   box-sizing: border-box;
 }
+
 
 /* Kolom 2 sticky naast kolom 1 */
 td:nth-child(2), th:nth-child(2) {
   position: sticky;
-  left: 50px; /* exact dezelfde waarde als kolom 1 */
+  left: 40px; /* exact dezelfde waarde als kolom 1 */
   background: #c00000;
   color: #ffffff;
   z-index: 9;
 }
 
+td, th {
+  text-align: center;
+}
 
+td:first-child, th:first-child,
+td:nth-child(2), th:nth-child(2) {
+  text-align: left;
+}
+tbody tr:nth-child(even) {
+  background: #111;
+}
 
+tbody tr:nth-child(odd) {
+  background: #000;
+}
+td, th {
+  border-right: 1px solid #333;
+}
+
+thead tr {
+  background: #c00000;
+  color: white;
+  font-weight: bold;
+}
 
     /* SCORE‑kolom rood (2e kolom) */
     td:nth-child(2),
