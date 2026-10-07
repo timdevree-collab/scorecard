@@ -70,22 +70,24 @@ th:nth-child(2) {
   text-align: left;
 }
 
-/* Eerste en tweede kolom sticky */
+/* Eerste kolom sticky */
 td:first-child, th:first-child {
   position: sticky;
   left: 0;
   background: #c00000;
   color: #ffffff;
   z-index: 6;
+  min-width: 60px; /* vaste breedte zodat kolom 2 niet overlapt */
 }
 
-/td:nth-child(2), th:nth-child(2) {
- / position: sticky;
-  /left: 120px; /* breedte van kolom 1 */
- / background: #c00000;
- / color: #ffffff;
- / z-index: 5;
-/}
+/* Tweede kolom sticky, naast kolom 1 */
+td:nth-child(2), th:nth-child(2) {
+  position: sticky;
+  left: 60px; /* zelfde waarde als min-width van kolom 1 */
+  background: #c00000;
+  color: #ffffff;
+  z-index: 5;
+}
 
 
     /* SCORE‑kolom rood (2e kolom) */
