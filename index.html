@@ -74,27 +74,15 @@
   </div>
 
   <script>
-    /* Snelle realtime CSV‑link */
-    const CSV_URL =
-      "https://docs.google.com/spreadsheets/d/2PACX-1vSK6OgbEvumfLvHWzht249FtRowmmoYtstc2mlFfzoh54j-NL3kHLBn8Jbz4AV2-A/gviz/tq?tqx=out:csv&gid=1965759856";
+    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSK6OgbEvumfLvHWzht249FtRowmmoYtstc2mlFfzoh54j-NL3kHLBn8Jbz4AV2-A/pub?gid=1965759856&single=true&output=csv";
 
     const TEAM_COL = 0;
     const SCORE_COL = 1;
 
-    let lastCSV = ""; // vorige versie onthouden
-
     async function loadData() {
       try {
-        // cacheBust zorgt dat Google geen oude versie geeft
-        const res = await fetch(CSV_URL + "&cacheBust=" + Date.now());
+        const res = await fetch(CSV_URL);
         const text = await res.text();
-
-        // check of CSV veranderd is
-        if (text === lastCSV) {
-          return; // niets doen
-        }
-
-        lastCSV = text; // nieuwe versie opslaan
 
         const rows = text
           .trim()
@@ -123,9 +111,6 @@
       const headEl = document.getElementById("tableHead");
       const bodyEl = document.getElementById("tableBody");
 
-      headEl.innerHTML = "";
-      bodyEl.innerHTML = "";
-
       // header
       const trHead = document.createElement("tr");
       headers.forEach(h => {
@@ -147,12 +132,7 @@
       });
     }
 
-    // eerste load
     loadData();
-
-    // elke 3 seconden checken op wijzigingen
-    setInterval(loadData, 3000);
   </script>
-
 </body>
 </html>
