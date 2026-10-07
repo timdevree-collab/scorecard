@@ -104,16 +104,16 @@ th:nth-child(2) {
   z-index: 9;
 
   font-size: 12px;          /* kleinere ploegnaam */
-  width: 140px;              /* smaller dan 100px */
-  min-width: 140px;
-  max-width: 140px;
+  width: 160px;              /* smaller dan 100px */
+  min-width: 160px;
+  max-width: 160px;
 
   padding: 0 6px;
   box-sizing: border-box;
   text-align: left;
-  white-space: nowrap;      /* voorkomt dat namen op 2 regels komen */
-  overflow: hidden;         /* verbergt te lange namen */
-  text-overflow: ellipsis;  /* toont '...' bij te lange namen */
+  white-space: normal;      /* voorkomt dat namen op 2 regels komen */
+  overflow: visible;         /* verbergt te lange namen */
+  text-overflow: unset;  /* toont '...' bij te lange namen */
 }
 
 
