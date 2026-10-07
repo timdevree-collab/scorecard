@@ -1,136 +1,49 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-  <meta charset="UTF-8">
-  <title>Scorebord</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #000000;
-      color: #ffffff;
+<script>
+  const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSK6OgbEvumfLvHWzht249FtRowmmoYtstc2mlFfzoh54j-NL3kHLBn8Jbz4AV2-A/pub?gid=1965759856&single=true&output=csv";
+
+  async function loadData() {
+    try {
+      const res = await fetch(CSV_URL);
+      const text = await res.text();
+
+      const rows = text
+        .trim()
+        .split("\n")
+        .map(r => r.split(","));
+
+      if (rows.length < 2) return;
+
+      const headers = rows[0];
+      const data = rows.slice(1);   // GEEN sortering, GEEN manipulatie
+
+      buildTable(headers, data);
+    } catch (e) {
+      console.error("Fout bij laden CSV:", e);
     }
+  }
 
-    .table-container {
-      overflow: auto;
-      max-height: 100vh;
-    }
+  function buildTable(headers, data) {
+    const headEl = document.getElementById("tableHead");
+    const bodyEl = document.getElementById("tableBody");
 
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      min-width: 600px;
-    }
+    const trHead = document.createElement("tr");
+    headers.forEach(h => {
+      const th = document.createElement("th");
+      th.textContent = h;
+      trHead.appendChild(th);
+    });
+    headEl.appendChild(trHead);
 
-    th, td {
-      border: 1px solid #444;
-      padding: 6px 8px;
-      text-align: left;
-      white-space: nowrap;
-    }
-
-    thead tr {
-      background: #c00000;
-      color: #ffffff;
-      position: sticky;
-      top: 0;
-      z-index: 5;
-    }
-
-    tbody tr:nth-child(even) {
-      background: #111111;
-    }
-
-    tbody tr:nth-child(odd) {
-      background: #000000;
-    }
-
-    /* linkerkolom “freeze” simulatie */
- /* Eerste en tweede kolom rood */
-td:first-child, th:first-child,
-td:nth-child(2), th:nth-child(2) {
-  background: #c00000;
-  color: #ffffff;
-}
-
-/* Eerste kolom blijft sticky */
-td:first-child, th:first-child {
-  position: sticky;
-  left: 0;
-  z-index: 6;
-}
-  </style>
-</head>
-<body>
-
-  <div class="table-container">
-    <table id="scoreTable">
-      <thead id="tableHead"></thead>
-      <tbody id="tableBody"></tbody>
-    </table>
-  </div>
-
-  <script>
-    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSK6OgbEvumfLvHWzht249FtRowmmoYtstc2mlFfzoh54j-NL3kHLBn8Jbz4AV2-A/pub?gid=1965759856&single=true&output=csv";
-
-    const TEAM_COL = 0;
-    const SCORE_COL = 1;
-
-    async function loadData() {
-      try {
-        const res = await fetch(CSV_URL);
-        const text = await res.text();
-
-        const rows = text
-          .trim()
-          .split("\n")
-          .map(r => r.split(","));
-
-        if (rows.length < 2) return;
-
-        const headers = rows[0];
-        const data = rows.slice(1);
-
-        // sorteren op score (aflopend)
-      //  data.sort((a, b) => {
-        //  const sa = parseFloat(a[SCORE_COL]) || 0;
-          //const sb = parseFloat(b[SCORE_COL]) || 0;
-          //return sb - sa;
-        });
-
-        buildTable(headers, data);
-      } catch (e) {
-        console.error("Fout bij laden CSV:", e);
-      }
-    }
-
-    function buildTable(headers, data) {
-      const headEl = document.getElementById("tableHead");
-      const bodyEl = document.getElementById("tableBody");
-
-      // header
-      const trHead = document.createElement("tr");
-      headers.forEach(h => {
-        const th = document.createElement("th");
-        th.textContent = h;
-        trHead.appendChild(th);
+    data.forEach(row => {
+      const tr = document.createElement("tr");
+      row.forEach(cell => {
+        const td = document.createElement("td");
+        td.textContent = cell;
+        tr.appendChild(td);
       });
-      headEl.appendChild(trHead);
+      bodyEl.appendChild(tr);
+    });
+  }
 
-      // body
-      data.forEach(row => {
-        const tr = document.createElement("tr");
-        row.forEach(cell => {
-          const td = document.createElement("td");
-          td.textContent = cell;
-          tr.appendChild(td);
-        });
-        bodyEl.appendChild(tr);
-      });
-    }
-
-    loadData();
-  </script>
-</body>
-</html>
+  loadData();
+</script>
