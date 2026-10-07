@@ -47,13 +47,19 @@
     }
 
     /* linkerkolom “freeze” simulatie */
-    td:first-child, th:first-child {
-      position: sticky;
-      left: 0;
-      background: #c00000;
-      color: #ffffff;
-      z-index: 6;
-    }
+ /* Eerste en tweede kolom rood */
+td:first-child, th:first-child,
+td:nth-child(2), th:nth-child(2) {
+  background: #c00000;
+  color: #ffffff;
+}
+
+/* Eerste kolom blijft sticky */
+td:first-child, th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 6;
+}
   </style>
 </head>
 <body>
