@@ -11,48 +11,25 @@
       background: #000000;
       color: #ffffff;
     }
-    .top10-bar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: #c00000;
-      color: #ffffff;
-      padding: 10px;
-      text-align: center;
-      font-size: 1.4rem;
-      font-weight: bold;
-    }
-    .top10-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .top10-item {
-      background: #ffffff;
-      color: #000000;
-      padding: 8px 12px;
-      border-radius: 4px;
-      min-width: 140px;
-      text-align: center;
-      font-weight: bold;
-    }
+
     .table-container {
       overflow: auto;
       max-height: 100vh;
     }
+
     table {
       border-collapse: collapse;
       width: 100%;
       min-width: 600px;
     }
+
     th, td {
       border: 1px solid #444;
       padding: 6px 8px;
       text-align: left;
       white-space: nowrap;
     }
+
     thead tr {
       background: #c00000;
       color: #ffffff;
@@ -60,12 +37,15 @@
       top: 0;
       z-index: 5;
     }
+
     tbody tr:nth-child(even) {
       background: #111111;
     }
+
     tbody tr:nth-child(odd) {
       background: #000000;
     }
+
     /* linkerkolom “freeze” simulatie */
     td:first-child, th:first-child {
       position: sticky;
@@ -77,10 +57,6 @@
   </style>
 </head>
 <body>
-  <div class="top10-bar">
-    TOP 10 – Ploegnaam + Score
-    <div class="top10-list" id="top10"></div>
-  </div>
 
   <div class="table-container">
     <table id="scoreTable">
@@ -90,11 +66,8 @@
   </div>
 
   <script>
-    // VERVANG DIT DOOR JE ECHTE GEDEPUBLICEERDE CSV-URL VAN TABBLAD "scorecard"
     const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSK6OgbEvumfLvHWzht249FtRowmmoYtstc2mlFfzoh54j-NL3kHLBn8Jbz4AV2-A/pub?gid=1965759856&single=true&output=csv";
 
-    // Verwacht: eerste rij = kolomnamen, bv. Ploeg;Score;...
-    // Ploegnaam in kolom 0, score in kolom 1 (pas aan indien nodig)
     const TEAM_COL = 0;
     const SCORE_COL = 1;
 
@@ -121,7 +94,6 @@
         });
 
         buildTable(headers, data);
-        buildTop10(data);
       } catch (e) {
         console.error("Fout bij laden CSV:", e);
       }
@@ -152,23 +124,7 @@
       });
     }
 
-    function buildTop10(data) {
-      const top10El = document.getElementById("top10");
-      const top10 = data.slice(0, 10);
-
-      top10.forEach(row => {
-        const team = row[TEAM_COL];
-        const score = row[SCORE_COL];
-        const div = document.createElement("div");
-        div.className = "top10-item";
-        div.textContent = `${team} – ${score}`;
-        top10El.appendChild(div);
-      });
-    }
-
     loadData();
-    // eventueel elke X seconden herladen:
-    // setInterval(loadData, 30000);
   </script>
 </body>
 </html>
