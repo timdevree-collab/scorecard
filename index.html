@@ -70,30 +70,47 @@ th:nth-child(2) {
   text-align: left;
 }
 
-/* Kolom 1 sticky + vaste breedte */
-td:first-child, th:first-child {
+/* ============================
+   KOLOM 1 — sticky + vaste breedte
+   ============================ */
+td:first-child,
+th:first-child {
   position: sticky;
-  left: 0;
+  left: 0;                 /* blijft altijd links */
   background: #c00000;
   color: #ffffff;
   z-index: 10;
 
-  width: 40px;
+  width: 40px;             /* smalle kolom */
   min-width: 40px;
   max-width: 40px;
 
-  padding: 0 4px;
-  box-sizing: border-box;
+  padding: 0 4px;          /* kleine padding */
+  box-sizing: border-box;  /* voorkomt dat padding de breedte vergroot */
+  text-align: left;        /* nummers links */
 }
 
 
-/* Kolom 2 sticky naast kolom 1 */
-td:nth-child(2), th:nth-child(2) {
+/* ============================
+   KOLOM 2 — sticky naast kolom 1
+   ============================ */
+td:nth-child(2),
+th:nth-child(2) {
   position: sticky;
-  left: 40px; /* exact dezelfde waarde als kolom 1 */
+  left: 40px;              /* exact dezelfde breedte als kolom 1 */
   background: #c00000;
   color: #ffffff;
   z-index: 9;
+
+  font-size: 12px;         /* kleinere ploegnaam */
+  width: 100px;            /* kolom smaller maken? verlaag deze waarde */
+  min-width: 100px;
+  max-width: 100px;
+
+  box-sizing: border-box;
+  text-align: left;        /* ploegnaam links */
+}
+
 }
 
 td, th {
