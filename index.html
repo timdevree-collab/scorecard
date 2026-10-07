@@ -78,19 +78,24 @@ td:first-child, th:first-child {
   color: #ffffff;
   z-index: 10;
 
-  width: 50px;      /* vaste breedte */
-  min-width: 50px;  /* voorkomt krimpen */
-  max-width: 50px;  /* voorkomt uitrekken */
+  width: 50px;
+  min-width: 50px;
+  max-width: 50px;
+
+  padding-left: 4px;
+  padding-right: 4px;
+  box-sizing: border-box;
 }
 
 /* Kolom 2 sticky naast kolom 1 */
 td:nth-child(2), th:nth-child(2) {
   position: sticky;
-  left: 80px;       /* exact dezelfde waarde als kolom 1 */
+  left: 50px; /* exact dezelfde waarde als kolom 1 */
   background: #c00000;
   color: #ffffff;
   z-index: 9;
 }
+
 
 
 
