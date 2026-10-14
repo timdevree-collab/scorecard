@@ -12,6 +12,20 @@
       color: #ffffff;
     }
 
+    /* Sticky titel bovenaan */
+    .title {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      padding: 15px 0;
+      background: #000000;
+      color: #ffffff;
+      border-bottom: 2px solid #c00000;
+    }
+
     .table-container {
       overflow: auto;
       max-height: 100vh;
@@ -26,8 +40,8 @@
     th, td {
       border: 1px solid #444;
       padding: 6px 8px;
-      text-align: left;
       white-space: nowrap;
+      text-align: center;
     }
 
     thead tr {
@@ -38,123 +52,62 @@
       z-index: 5;
     }
 
-    tbody tr:nth-child(even) {
-      background: #111111;
-    }
+    tbody tr:nth-child(even) { background: #111; }
+    tbody tr:nth-child(odd)  { background: #000; }
 
-    tbody tr:nth-child(odd) {
-      background: #000000;
-    }
-
-/* SCORE-kolom: witte achtergrond + rode tekst */
-td:nth-last-child(3),
-th:nth-last-child(3) {
-  background: #c00000;    /* wit */
-  color: #ffffff;        /* rood */
-  font-weight: bold;     /* duidelijke score */
-}
-
-/* Standaard: alles centreren */
-td, th {
-  text-align: center;
-}
-
-/* Kolom 1 links */
-td:first-child,
-th:first-child {
-  text-align: left;
-}
-
-/* Kolom 2 links */
-td:nth-child(2),
-th:nth-child(2) {
-  text-align: left;
-}
-
-/* ============================
-   KOLOM 1 — sticky + vaste breedte
-   ============================ */
-td:first-child,
-th:first-child {
-  position: sticky;
-  left: 0;
-  background: #c00000;
-  color: #ffffff;
-  z-index: 10;
-
-  width: 35px;             /* iets smaller */
-  min-width: 35px;
-  max-width: 35px;
-
-  padding: 0 3px;
-  box-sizing: border-box;
-  text-align: center;       /* nummer mooi gecentreerd */
-  font-size: 11px;          /* iets kleiner nummer */
-}
-
-
-/* ============================
-   KOLOM 2 — sticky naast kolom 1
-   ============================ */
-td:nth-child(2),
-th:nth-child(2) {
-  position: sticky;
-  left: 35px;               /* exact dezelfde waarde als kolom 1 */
-  background: #c00000;
-  color: #ffffff;
-  z-index: 9;
-
-  font-size: 12px;          /* kleinere ploegnaam */
-  width: 240px;              /* smaller dan 100px */
-  min-width: 240px;
-  max-width: 240px;
-
-  padding: 0 6px;
-  box-sizing: border-box;
-  text-align: left;
-  white-space: normal;      /* voorkomt dat namen op 2 regels komen */
-  overflow: visible;         /* verbergt te lange namen */
-  text-overflow: unset;  /* toont '...' bij te lange namen */
-}
-
-
-
-
-td, th {
-  text-align: center;
-}
-
-td:first-child, th:first-child,
-td:nth-child(2), th:nth-child(2) {
-  text-align: left;
-}
-tbody tr:nth-child(even) {
-  background: #111;
-}
-
-tbody tr:nth-child(odd) {
-  background: #000;
-}
-td, th {
-  border-right: 1px solid #333;
-}
-
-thead tr {
-  background: #c00000;
-  color: white;
-  font-weight: bold;
-}
-
-    /* SCORE‑kolom rood (2e kolom) */
-    td:nth-child(2),
-    th:nth-child(2) {
+    /* ============================
+       KOLOM 1 — sticky + vet
+       ============================ */
+    td:first-child,
+    th:first-child {
+      position: sticky;
+      left: 0;
       background: #c00000;
       color: #ffffff;
+      z-index: 10;
+
+      width: 35px;
+      min-width: 35px;
+      max-width: 35px;
+
+      padding: 0 3px;
+      box-sizing: border-box;
+      text-align: center;
+      font-size: 11px;
+
+      font-weight: bold;   /* <-- VET */
+    }
+
+    /* ============================
+       KOLOM 2 — sticky + vet
+       ============================ */
+    td:nth-child(2),
+    th:nth-child(2) {
+      position: sticky;
+      left: 35px;
+      background: #c00000;
+      color: #ffffff;
+      z-index: 9;
+
+      font-size: 12px;
+      width: 240px;
+      min-width: 240px;
+      max-width: 240px;
+
+      padding: 0 6px;
+      box-sizing: border-box;
+      text-align: left;
+      white-space: normal;
+
+      font-weight: bold;   /* <-- VET */
     }
 
   </style>
 </head>
 <body>
+
+  <!-- Sticky Titel -->
+  <div class="title">SCOREBORD</div>
 
   <div class="table-container">
     <table id="scoreTable">
@@ -174,22 +127,11 @@ thead tr {
         const res = await fetch(CSV_URL);
         const text = await res.text();
 
-        const rows = text
-          .trim()
-          .split("\n")
-          .map(r => r.split(","));
-
+        const rows = text.trim().split("\n").map(r => r.split(","));
         if (rows.length < 2) return;
 
         const headers = rows[0];
         const data = rows.slice(1);
-
-        // sorteren op score (aflopend)
-   //     data.sort((a, b) => {
-      //    const sa = parseFloat(a[SCORE_COL]) || 0;
-     //     const sb = parseFloat(b[SCORE_COL]) || 0;
-    //      return sb - sa;
-  //      });
 
         buildTable(headers, data);
       } catch (e) {
@@ -201,7 +143,9 @@ thead tr {
       const headEl = document.getElementById("tableHead");
       const bodyEl = document.getElementById("tableBody");
 
-      // header
+      headEl.innerHTML = "";
+      bodyEl.innerHTML = "";
+
       const trHead = document.createElement("tr");
       headers.forEach(h => {
         const th = document.createElement("th");
@@ -210,7 +154,6 @@ thead tr {
       });
       headEl.appendChild(trHead);
 
-      // body
       data.forEach(row => {
         const tr = document.createElement("tr");
         row.forEach(cell => {
@@ -224,5 +167,7 @@ thead tr {
 
     loadData();
   </script>
+
 </body>
 </html>
+
