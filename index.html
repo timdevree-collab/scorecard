@@ -55,6 +55,14 @@
     tbody tr:nth-child(even) { background: #111; }
     tbody tr:nth-child(odd)  { background: #000; }
 
+/* Container scrollbaar op gsm */
+.table-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100vw;
+}
+
+    
     /* ============================
        KOLOM 1 — sticky + vet
        ============================ */
@@ -102,29 +110,24 @@
       font-weight: bold;   /* <-- VET */
     }
 
- /* ============================
-   KOLOM 16 — sticky + vet + rood + centraal
+ KOLOM 16 — sticky rechts (SCORE)
    ============================ */
-
 td:nth-child(16),
 th:nth-child(16) {
   position: sticky;
-  left: 275px;              /* 35px (kolom 1) + 240px (kolom 2) */
-  background: #c00000;      /* rood */
+  right: 0;                /* plak aan rechterkant */
+  background: #c00000;     /* rood */
   color: #ffffff;
-  z-index: 8;
-
-  font-size: 18px;          /* grotere tekst */
-  font-weight: bold;        /* vetgedrukt */
-
-  width: 100px;             /* SMALLER */
-  min-width: 100px;         /* forceer minimale breedte */
-  max-width: 100px;         /* forceer maximale breedte */
-
-  padding: 0 4px;           /* iets minder padding */
+  z-index: 10;
+  font-size: 18px;         /* grotere tekst */
+  font-weight: bold;       /* vetgedrukt */
+  width: 100px;
+  min-width: 100px;
+  max-width: 100px;
+  padding: 0 4px;
   box-sizing: border-box;
-  text-align: center;       /* centraal */
-  white-space: nowrap;      /* voorkomt dat SCORE op 2 regels komt */
+  text-align: center;
+  white-space: nowrap;
 }
 
 
