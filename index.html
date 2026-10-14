@@ -110,17 +110,14 @@
       font-weight: bold;   /* <-- VET */
     }
 
+
 /* ============================
-   KOLOM 16 — sticky rechts + rood + boven alles
+   KOLOM 16 — NIET sticky op gsm
    ============================ */
 td:nth-child(16),
 th:nth-child(16) {
-
-
-  background: #c00000 !important;   /* <-- FORCEER ROOD */
-  background-clip: padding-box;   /* <-- BELANGRIJK */
+  background: #c00000;
   color: #ffffff;
-  z-index: 20;             /* <-- BELANGRIJK: boven alle andere kolommen */
 
   font-size: 18px;
   font-weight: bold;
@@ -130,13 +127,9 @@ th:nth-child(16) {
   max-width: 100px;
 
   padding: 0 4px;
-  box-sizing: border-box;
   text-align: center;
   white-space: nowrap;
 }
-
-
-
     
   </style>
 </head>
