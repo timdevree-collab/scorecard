@@ -105,6 +105,7 @@
  /* ============================
    KOLOM 16 — sticky + vet + rood + centraal
    ============================ */
+
 td:nth-child(16),
 th:nth-child(16) {
   position: sticky;
@@ -113,20 +114,18 @@ th:nth-child(16) {
   color: #ffffff;
   z-index: 8;
 
-  font-size: 24px;
-  font-weight: bold
-  width: 90px;
-  min-width: 90px;
-  max-width: 90px;
+  font-size: 18px;          /* grotere tekst */
+  font-weight: bold;        /* vetgedrukt */
 
-  padding: 0 6px;
+  width: 100px;             /* SMALLER */
+  min-width: 100px;         /* forceer minimale breedte */
+  max-width: 100px;         /* forceer maximale breedte */
+
+  padding: 0 4px;           /* iets minder padding */
   box-sizing: border-box;
-  text-align: center;       /* <-- CENTRAAL */
-  white-space: normal;
-
-  font-weight: bold;
+  text-align: center;       /* centraal */
+  white-space: nowrap;      /* voorkomt dat SCORE op 2 regels komt */
 }
-
 
 
 
