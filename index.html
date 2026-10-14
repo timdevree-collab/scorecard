@@ -55,12 +55,12 @@
     tbody tr:nth-child(even) { background: #111; }
     tbody tr:nth-child(odd)  { background: #000; }
 
-/* Container scrollbaar op gsm */
 .table-container {
-  overflow-x: auto;
-  overflow-y: hidden;
-  max-width: 100vw;
+  overflow-x: auto;   /* horizontaal scrollen */
+  overflow-y: visible; /* tabel mag volledig naar beneden */
+  max-height: none;    /* geen hoogtebeperking */
 }
+
 
     
     /* ============================
