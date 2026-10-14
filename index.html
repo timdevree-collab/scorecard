@@ -110,20 +110,24 @@
       font-weight: bold;   /* <-- VET */
     }
 
- KOLOM 16 — sticky rechts (SCORE)
+/* ============================
+   KOLOM 16 — sticky rechts + rood + boven alles
    ============================ */
 td:nth-child(16),
 th:nth-child(16) {
   position: sticky;
-  right: 0;                /* plak aan rechterkant */
-  background: #c00000;     /* rood */
+  right: 0;                /* plak rechts */
+  background: #c00000 !important;   /* <-- FORCEER ROOD */
   color: #ffffff;
-  z-index: 10;
-  font-size: 18px;         /* grotere tekst */
-  font-weight: bold;       /* vetgedrukt */
+  z-index: 50;             /* <-- BELANGRIJK: boven alle andere kolommen */
+
+  font-size: 18px;
+  font-weight: bold;
+
   width: 100px;
   min-width: 100px;
   max-width: 100px;
+
   padding: 0 4px;
   box-sizing: border-box;
   text-align: center;
